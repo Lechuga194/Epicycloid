@@ -41,6 +41,7 @@ function dibujaLineas() {
 ctx.beginPath();
 ctx.setLineDash([]);
 ctx.fillStyle = "white";
+ctx.strokeStyle = "white";
 
 //Translada la epicicloide al origen
 ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -50,9 +51,12 @@ ctx.translate(canvas.width / 2, canvas.height / 2);
  * @param {numero de iteracion sobre la circunferencia} k
  */
 function epicicloide(r, k) {
+  ctx.beginPath();
   for (let i = 0; i <= 360; i++) {
-    x = r * (k + 1) * Math.cos(i) - r * Math.cos((k + 1) * i);
-    y = r * (k + 1) * Math.sin(i) - r * Math.sin((k + 1) * i);
-    ctx.fillRect(x, y, 1, 1);
+    let grados = i * (Math.PI / 180);
+    x = r * (k + 1) * Math.cos(grados) - r * Math.cos((k + 1) * grados);
+    y = r * (k + 1) * Math.sin(grados) - r * Math.sin((k + 1) * grados);
+    ctx.lineTo(x, y);
   }
+  ctx.stroke();
 }
